@@ -1,0 +1,24 @@
+cmake_minimum_required(VERSION 2.8.4)
+
+project(SeetaFace)
+
+# Build options
+option(BUILD_EXAMPLES  "Set to ON to build examples"  ON)
+
+# Use C++11
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse4.1")
+
+# Build shared library
+include_directories(include)
+
+aux_source_directory(src src_files)
+aux_source_directory(src/classifier src_files)
+aux_source_directory(src/feat src_files)
+aux_source_directory(src/io src_files)
+aux_source_directory(src/util src_files)
+
+SET(LIBRARY_OUTPUT_PATH lib)
+add_library(seeta_facedet_lib SHARED ${src_files})
+
